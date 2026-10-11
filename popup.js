@@ -16,16 +16,26 @@ document.addEventListener('DOMContentLoaded', () => {
         const row = document.createElement('div');
         row.className = 'tab-row';
 
-        const bar = document.createElement('div');
-        bar.className = 'debt-bar';
-        bar.style.backgroundColor = getDebtColor(idleMinutes);
-        bar.style.width = Math.min(idleMinutes, 100) + 'px';
+        const emoji = document.createElement('span');
+        emoji.className = 'emoji';
+        emoji.textContent = getDebtEmoji(idleMinutes);
 
-        const label = document.createElement('span');
-        label.textContent = `${tab.title} — ${idleMinutes} min idle`;
+        const info = document.createElement('div');
+        info.className = 'tab-info';
 
-        row.appendChild(bar);
-        row.appendChild(label);
+        const title = document.createElement('div');
+        title.className = 'tab-title';
+        title.textContent = tab.title;
+
+        const badge = document.createElement('span');
+        badge.className = 'debt-badge';
+        badge.style.backgroundColor = getDebtColor(idleMinutes);
+        badge.textContent = `${idleMinutes} min idle`;
+
+        info.appendChild(title);
+        info.appendChild(badge);
+        row.appendChild(emoji);
+        row.appendChild(info);
         tabList.appendChild(row);
       });
 
@@ -35,7 +45,12 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function getDebtColor(minutes) {
-  if (minutes < 5) return '#4CAF50';   // green — fresh
-  if (minutes < 30) return '#FFC107';  // yellow — getting stale
-  return '#F44336';                    // red — seriously neglected
+  if (minutes < 5) return '#c3b8e8';   
+  if (minutes < 30) return '#a594d1';  
+  return '#8e7cc3';                     
+}
+function getDebtEmoji(minutes) {
+  if (minutes < 5) return '🌱';
+  if (minutes < 30) return '🥀';
+  return '💀';
 }
