@@ -1,0 +1,17 @@
+{
+  "name": "Tab Debt Tracker",
+  "version": "1.0",
+  "manifest_version": 3,
+  "description": "Tracks how long your tabs sit idle and visualizes your 'tab debt'",
+  "permissions": [
+    "tabs",
+    "storage"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_icon": "icon.png",
+    "default_popup": "index.html"
+  }
+}
